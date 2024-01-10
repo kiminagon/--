@@ -1,9 +1,11 @@
 import ReactRefreshPlugin from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
-export default {
+export default defineConfig({
   plugins: [ReactRefreshPlugin()],
   optimizeDeps: {
     include: ['@mui/material'],
   },
-};
+});
+
 
