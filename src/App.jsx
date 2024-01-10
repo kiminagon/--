@@ -1,38 +1,35 @@
-// App.jsx
-import React, { useState } from 'react';
-import { Button, Container, Typography } from '@mui/material';
+// src/App.jsx
+import React, { useState } from "react";
+import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 
-const compliments = [
-  '素晴らしい！',
-  'あなたは優れています！',
-  '素晴らしい仕事です！',
-  '頑張っていますね！',
-  'すごいですね！',
-];
+function App() {
+  const [open, setOpen] = useState(false);
+  const [compliment, setCompliment] = useState("");
 
-const App = () => {
-  const [currentCompliment, setCurrentCompliment] = useState('');
+  const handleComplimentClick = (clickedCompliment) => {
+    setCompliment(clickedCompliment);
+    setOpen(true);
+  };
 
-  const getRandomCompliment = () => {
-    const randomIndex = Math.floor(Math.random() * compliments.length);
-    setCurrentCompliment(compliments[randomIndex]);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
-    <Container>
-      <Typography variant="h4" sx={{ my: 4 }}>
-        褒め言葉アプリ
-      </Typography>
-      <Button variant="contained" color="primary" onClick={getRandomCompliment}>
-        この褒め言葉の文章をクリックすると使用例が見れる
-      </Button>
-      {currentCompliment && (
-        <Typography variant="h6" sx={{ mt: 2 }}>
-          {currentCompliment}
-        </Typography>
-      )}
-    </Container>
+    <div>
+      <h1>丁寧に相手を貶そう</h1>
+      <Button onClick={() => handleComplimentClick("素晴らしい！")}>褒め言葉を表示</Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>褒め言葉</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{compliment}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>閉じる</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
-};
+}
 
 export default App;
